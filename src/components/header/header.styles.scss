@@ -1,10 +1,9 @@
 .header-container {
-  margin-top: 0.5rem;
+  margin-top: 23px;
   flex-direction: column;
 
   .panel {
     display: flex;
-    margin-top: 15px;
     margin-bottom: 5px;
     justify-content: space-between;
 
@@ -31,6 +30,7 @@
     padding: 0;
     margin-bottom: 25px;
     border-radius: 5px;
+    overflow: hidden;
   }
   .nav-item {
     text-align: center;

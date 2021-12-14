@@ -1,0 +1,26 @@
+.current-question {
+  background-color: #303030;
+  padding: 16px;
+  margin-bottom: 25px;
+  border-radius: 4px;
+  display: flex;
+
+  .bird-image {
+    max-width: 200px;
+    height: 155px;
+    border-radius: 10px;
+    margin: 0;
+  }
+
+  .bird-info {
+    width: 75%;
+    margin-left: 40px;
+  }
+
+  .name {
+    margin-top: 5px;
+    padding-bottom: 16px;
+    font-size: 25px;
+    border-bottom: 1px solid #555;
+  }
+}

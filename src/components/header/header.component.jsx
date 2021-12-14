@@ -15,14 +15,14 @@ const Header = () => (
         <span className="score-count"> 0</span>
       </div>
     </div>
-    <div className="pagination">
-      <span className="nav-item nav-item_active">Разминка</span>
-      <span className="nav-item">Воробьиные</span>
-      <span className="nav-item">Лесные птицы</span>
-      <span className="nav-item">Певчие птицы</span>
-      <span className="nav-item">Хищные птицы</span>
-      <span className="nav-item">Морские птицы</span>
-    </div>
+    <ul className="pagination">
+      <li className="nav-item nav-item_active">Разминка</li>
+      <li className="nav-item">Воробьиные</li>
+      <li className="nav-item">Лесные птицы</li>
+      <li className="nav-item">Певчие птицы</li>
+      <li className="nav-item">Хищные птицы</li>
+      <li className="nav-item">Морские птицы</li>
+    </ul>
   </div>
 );
 
