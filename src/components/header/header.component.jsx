@@ -1,48 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
-import { auth } from "../../firebase/firebase.utils";
-import CartIcon from "../cart-icon/cart-icon.component";
-import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 import "./header.styles.scss";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { selectCartHidden } from "../../redux/cart/cart.selectors";
-import { createStructuredSelector } from "reselect";
 
-const Header = ({ currentUser, hidden }) => (
-  <div className="header">
-    <Link className="logo-container" to="/">
-      <Logo className="logo" />
-    </Link>
-    <div className="options">
-      <Link className="option" to="/shop">
-        SHOP
-      </Link>
-      <Link className="option" to="/shop">
-        CONTACT
-      </Link>
-      {currentUser ? (
-        <div className="option" onClick={() => auth.signOut()}>
-          SIGN OUT
-        </div>
-      ) : (
-        <Link className="option" to="/signin">
-          SIGN IN
-        </Link>
-      )}
-      <CartIcon />
+const Header = () => (
+  <div className="header-container">
+    <div className="panel">
+      <div className="logo-container">
+        <Logo className="logo" />
+      </div>
+      <div className="score-title">
+        Score:
+        <span className="score-count"> 0</span>
+      </div>
     </div>
-    {hidden ? null : <CartDropdown />}
+    <div className="pagination">
+      <span className="nav-item nav-item_active">Разминка</span>
+      <span className="nav-item">Воробьиные</span>
+      <span className="nav-item">Лесные птицы</span>
+      <span className="nav-item">Певчие птицы</span>
+      <span className="nav-item">Хищные птицы</span>
+      <span className="nav-item">Морские птицы</span>
+    </div>
   </div>
 );
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  hidden: selectCartHidden,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;
