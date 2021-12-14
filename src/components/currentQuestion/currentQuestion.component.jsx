@@ -6,13 +6,13 @@ const CurrentQuestion = ({ image, name, audio }) => (
   <div className="current-question">
     <div className="bird-image-container">
       <img
-        src="https://live.staticflickr.com//65535//49360363066_ff02bb6a73.jpg"
+        src={`${image}`}
         className="bird-image"
-        alt="image"
+        alt="bird"
       />
     </div>
     <div className="bird-info">
-      <h3 className="name">******</h3>
+      <h2 className="name">{`${true ? '******' : name}`}</h2>
     </div>
   </div>
 );
