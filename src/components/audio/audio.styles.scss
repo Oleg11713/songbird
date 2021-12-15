@@ -1,0 +1,19 @@
+.audio {
+  width: 100%;
+  transition: all 0.5s linear;
+
+  &:hover,
+  focus,
+  active {
+    transform: scale(1.03);
+  }
+}
+
+audio::-webkit-media-controls-panel {
+  background: grey;
+}
+
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-current-time-display {
+  color: white;
+}

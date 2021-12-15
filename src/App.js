@@ -5,6 +5,7 @@ import Header from "./components/header/header.component";
 import CurrentQuestion from "./components/currentQuestion/currentQuestion.component";
 import { birdsData } from "./components/birds-data";
 import AnswerArea from "./components/answerArea/answerArea.component";
+import ButtonNext from "./components/buttonNext/buttonNext.component";
 
 class App extends React.Component {
   constructor() {
@@ -29,6 +30,7 @@ class App extends React.Component {
           image={currentBird.image}
         />
         <AnswerArea birds={birds[1]} />
+        <ButtonNext />
       </div>
     );
   }

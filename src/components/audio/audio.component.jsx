@@ -1,18 +1,11 @@
 import React from "react";
 
-import './audio.styles.scss'
+import "./audio.styles.scss";
 
-class Audio extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const Audio = ({ audio }) => (
+  <div className="audio-bar">
+    <audio className='audio' controls src={`${audio}`} />
+  </div>
+);
 
-    render() {
-        return(
-            <div className='audio-bar'>
-
-
-            </div>
-        )
-    }
-}
+export default Audio;

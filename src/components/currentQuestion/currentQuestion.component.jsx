@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./currentQuestion.styles.scss";
+import Audio from "../audio/audio.component";
 
 const CurrentQuestion = ({ image, name, audio }) => (
   <div className="current-question">
@@ -13,6 +14,7 @@ const CurrentQuestion = ({ image, name, audio }) => (
     </div>
     <div className="bird-info">
       <h2 className="name">{`${true ? '******' : name}`}</h2>
+        <Audio audio={audio}/>
     </div>
   </div>
 );

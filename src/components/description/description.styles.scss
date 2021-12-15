@@ -1,12 +1,12 @@
 .description {
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  padding-bottom: 0;
+  padding: 16px 16px 0 16px;
   border: 1px solid #444;
   border-radius: 4px;
-  max-width: 540px;
+  width: 80%;
   background-color: #303030;
+  font-size: 15px;
 
   .bird-info {
     display: flex;
@@ -22,9 +22,21 @@
       margin-right: 2rem;
     }
 
-    .name {
-      font-size: 1.40625rem;
+    .name-species-audio {
+      width: 70% ;
+
+      .name {
+        margin: 0;
+        padding: 4px 0 10px 0;
+        font-size: 22px;
+        border-bottom: 1px solid #555;
+      }
+
+      .species {
+        margin: 0 0 20px 0;
+        padding: 4px 0 4px 0;
+        border-bottom: 1px solid #555;
+      }
     }
   }
-
 }

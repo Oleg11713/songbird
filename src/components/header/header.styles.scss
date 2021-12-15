@@ -15,7 +15,7 @@
     }
 
     .score-title {
-      font-size: 1.171875rem;
+      font-size: 20px;
 
       .score-count {
         line-height: 55px;
@@ -28,13 +28,16 @@
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 0;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    margin-top: 0;
     border-radius: 5px;
     overflow: hidden;
   }
+
   .nav-item {
+
     text-align: center;
-    padding: 6px 46px;
+    padding: 6px 44.8px;
     background-color: #008966;
     border-color: #007c5d;
   }
