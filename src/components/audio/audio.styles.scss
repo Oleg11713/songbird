@@ -10,7 +10,11 @@
 }
 
 audio::-webkit-media-controls-panel {
-  background: grey;
+  background: linear-gradient(
+    to right,
+    rgb(0, 188, 140) 0%,
+    rgb(61, 133, 140) 84.8703%,
+  );
 }
 
 audio::-webkit-media-controls-time-remaining-display,

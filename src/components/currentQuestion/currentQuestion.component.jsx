@@ -6,15 +6,11 @@ import Audio from "../audio/audio.component";
 const CurrentQuestion = ({ image, name, audio }) => (
   <div className="current-question">
     <div className="bird-image-container">
-      <img
-        src={`${image}`}
-        className="bird-image"
-        alt="bird"
-      />
+      <img src={`${image}`} className="bird-image" alt="bird" />
     </div>
     <div className="bird-info">
-      <h2 className="name">{`${true ? '******' : name}`}</h2>
-        <Audio audio={audio}/>
+      <h2 className="name">{`${false ? "******" : name}`}</h2>
+      <Audio audio={audio} />
     </div>
   </div>
 );

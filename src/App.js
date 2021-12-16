@@ -1,39 +1,45 @@
-import React from "react";
+import React, { useReducer } from "react";
 
 import "./App.css";
 import Header from "./components/header/header.component";
 import CurrentQuestion from "./components/currentQuestion/currentQuestion.component";
-import { birdsData } from "./components/birds-data";
 import AnswerArea from "./components/answerArea/answerArea.component";
 import ButtonNext from "./components/buttonNext/buttonNext.component";
+import { INITIAL_STATE as state, INITIAL_STATE } from "./redux/state";
+import { allReducer } from "./redux/allReducer";
+import { connect } from "react-redux";
 
-class App extends React.Component {
-  constructor() {
-    super();
+const App = () => {
+  const [state] = useReducer(allReducer, INITIAL_STATE);
+  const { birds, level, total, selectedBird } = state;
 
-    this.state = {
-      birds: birdsData,
-    };
-  }
+  const currentBird =
+    birds[level][Math.floor(Math.random() * birds[level].length)];
 
-  render() {
-    const { birds } = this.state;
-    const currentBird = birds[1][Math.floor(Math.random() * birds[1].length)];
-    console.log(currentBird.name);
-    return (
-      <div className="container">
-        <Header />
-        <CurrentQuestion
-          key={currentBird.id}
-          name={currentBird.name}
-          audio={currentBird.audio}
-          image={currentBird.image}
-        />
-        <AnswerArea birds={birds[1]} />
-        <ButtonNext />
-      </div>
-    );
-  }
-}
+  console.log(state.level);
 
-export default App;
+  return (
+    <div className="container">
+      <Header total={total} level={level} />
+      <CurrentQuestion
+        key={currentBird.id}
+        name={currentBird.name}
+        audio={currentBird.audio}
+        image={currentBird.image}
+      />
+      <AnswerArea
+        birds={birds[level]}
+        currentBird={currentBird}
+        selectedBird={selectedBird}
+      />
+      <ButtonNext level={level} />
+    </div>
+  );
+};
+
+const mapStateToProps = () => ({
+  selectedBird: state.selectedBird,
+  level: state.level,
+});
+
+export default connect(mapStateToProps)(App);
