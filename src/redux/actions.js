@@ -17,3 +17,8 @@ export const setCurrentBird = (bird) => ({
   type: "SET_CURRENT_BIRD",
   payload: bird,
 });
+
+export const isLevelCompleted = (levelCompleted) => ({
+  type: "IS_LEVEL_COMPLETED",
+  payload: levelCompleted,
+});

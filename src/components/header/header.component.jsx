@@ -1,13 +1,13 @@
 import React from "react";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { connect } from "react-redux";
 
 import "./header.styles.scss";
-import { INITIAL_STATE as state } from "../../redux/state";
+import { useSelector } from "react-redux";
 
-const Header = ({ level, total }) => {
-  console.log(state.level);
+const Header = () => {
+  const total = useSelector((state) => state.total);
+  const level = useSelector((state) => state.level);
 
   return (
     <div className="header-container">
@@ -42,8 +42,4 @@ const Header = ({ level, total }) => {
   );
 };
 
-const mapStateToProps = () => ({
-  level: state.level,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

@@ -1,22 +1,26 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import "./buttonNext.styles.scss";
-import { setLevel } from "../../redux/actions";
-import { INITIAL_STATE as state } from "../../redux/state";
+import { isLevelCompleted, setLevel } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-const ButtonNext = ({ dispatch }) => {
-  console.log(state.level);
+const ButtonNext = () => {
+  const dispatch = useDispatch();
+  let level = useSelector((state) => state.level);
+  const levelCompleted = useSelector((state) => state.levelCompleted);
   return (
     <button
-      className="button-next active"
+      className={`button-next ${levelCompleted ? "active" : ""}`}
       onClick={() => {
-        if (state.level < 5) {
-          state.level++;
-          dispatch(setLevel(state.level));
-        } else {
-          state.level = 0;
-          dispatch(setLevel(state.level));
+        if (levelCompleted) {
+          if (level < 5) {
+            dispatch(isLevelCompleted(false));
+            level++;
+            dispatch(setLevel(level));
+          } else {
+            level = 0;
+            dispatch(setLevel(level));
+          }
         }
       }}
     >
@@ -25,4 +29,4 @@ const ButtonNext = ({ dispatch }) => {
   );
 };
 
-export default connect()(ButtonNext);
+export default ButtonNext;
