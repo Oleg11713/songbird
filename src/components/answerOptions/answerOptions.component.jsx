@@ -2,11 +2,12 @@ import React from "react";
 
 import "./answerOptions.styles.scss";
 import {
-  isLevelCompleted,
-  isSelectedBirdExist,
-  setCount,
-  setSelectedBird,
-  setTotal,
+    isCorrectCurrentBird,
+    isLevelCompleted,
+    isSelectedBirdExist,
+    setCount,
+    setSelectedBird,
+    setTotal,
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import lostSound from "../../sounds/lost.mp3";
@@ -32,6 +33,7 @@ const AnswerOptions = ({ birds, currentBird }) => {
                 if (bird.name === currentBird.name) {
                   click.classList.add("won");
                   new Audio(wonSound).play();
+                  dispatch(isCorrectCurrentBird(true))
                   dispatch(isLevelCompleted(true));
                   dispatch(setTotal(count));
                   dispatch(setCount(5));

@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
   selectedBird: null,
   levelCompleted: false,
   selectedBirdExist: false,
+  correctCurrentBird: false,
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -27,6 +28,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         levelCompleted: action.payload,
+      };
+    case "IS_CORRECT_CURRENT_BIRD":
+      return {
+        ...state,
+        correctCurrentBird: action.payload,
       };
     case "SET_LEVEL":
       return {

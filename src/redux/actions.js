@@ -8,6 +8,11 @@ export const isSelectedBirdExist = (selectedBirdExist) => ({
   payload: selectedBirdExist,
 });
 
+export const isCorrectCurrentBird = (correctCurrentBird) => ({
+  type: "IS_CORRECT_CURRENT_BIRD",
+  payload: correctCurrentBird,
+});
+
 export const setLevel = (level) => ({
   type: "SET_LEVEL",
   payload: level,

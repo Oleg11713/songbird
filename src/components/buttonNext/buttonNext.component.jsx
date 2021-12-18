@@ -2,9 +2,10 @@ import React from "react";
 
 import "./buttonNext.styles.scss";
 import {
-  isLevelCompleted,
-  isSelectedBirdExist,
-  setLevel,
+    isCorrectCurrentBird,
+    isLevelCompleted,
+    isSelectedBirdExist,
+    setLevel,
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -28,6 +29,7 @@ const ButtonNext = () => {
             dispatch(isSelectedBirdExist(false));
           }
         }
+          dispatch(isCorrectCurrentBird(false))
         dispatch(setLevel(level));
         dispatch(isLevelCompleted(false));
       }}
