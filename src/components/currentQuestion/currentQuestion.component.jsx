@@ -3,6 +3,7 @@ import React from "react";
 import "./currentQuestion.styles.scss";
 import Audio from "../audio/audio.component";
 import { useSelector } from "react-redux";
+import startBird from '../../assets/startBird.jpg'
 
 const CurrentQuestion = ({ image, name, audio }) => {
   const selectedBird = useSelector((state) => state.selectedBird);
@@ -15,8 +16,8 @@ const CurrentQuestion = ({ image, name, audio }) => {
           selectedBirdExist
             ? selectedBird.name === name
               ? image
-              : selectedBird.image
-            : image
+              : startBird
+            : startBird
         }`}
         className="bird-image"
         alt="bird"

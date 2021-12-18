@@ -9,6 +9,8 @@ import {
   setTotal,
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import lostSound from "../../sounds/lost.mp3";
+import wonSound from "../../sounds/won.mp3";
 
 const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
@@ -29,13 +31,16 @@ const AnswerOptions = ({ birds, currentBird }) => {
               if (!levelCompleted) {
                 if (bird.name === currentBird.name) {
                   click.classList.add("won");
+                  new Audio(wonSound).play();
                   dispatch(isLevelCompleted(true));
                   dispatch(setTotal(count));
                   dispatch(setCount(5));
                 } else {
                   click.classList.remove("won");
-                  if (!click.classList.contains("lost"))
+                  if (!click.classList.contains("lost")) {
+                    new Audio(lostSound).play();
                     dispatch(setCount(count - 1));
+                  }
                   click.classList.add("lost");
                 }
               }
