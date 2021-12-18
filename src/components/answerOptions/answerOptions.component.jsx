@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
   const levelCompleted = useSelector((state) => state.levelCompleted);
-  const total = useSelector((state) => state.total);
   const count = useSelector((state) => state.count);
 
   return (
@@ -24,7 +23,6 @@ const AnswerOptions = ({ birds, currentBird }) => {
             key={bird.name}
             className="answers-item"
             onClick={() => {
-              console.log(count, total);
               dispatch(setSelectedBird(bird));
               dispatch(isSelectedBirdExist(true));
               const click = document.querySelector(`#${bird.name}`);

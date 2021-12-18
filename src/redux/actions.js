@@ -18,6 +18,11 @@ export const setTotal = (total) => ({
   payload: total,
 });
 
+export const resetTotal = (total) => ({
+  type: "RESET_TOTAL",
+  payload: total,
+});
+
 export const setCount = (count) => ({
   type: "SET_COUNT",
   payload: count,

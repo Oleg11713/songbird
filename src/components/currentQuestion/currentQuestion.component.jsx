@@ -10,17 +10,17 @@ const CurrentQuestion = ({ image, name, audio }) => {
 
   return (
     <div className="current-question">
-        <img
-          src={`${
-            selectedBirdExist
-              ? selectedBird.name === name
-                ? image
-                : selectedBird.image
-              : image
-          }`}
-          className="bird-image"
-          alt="bird"
-        />
+      <img
+        src={`${
+          selectedBirdExist
+            ? selectedBird.name === name
+              ? image
+              : selectedBird.image
+            : image
+        }`}
+        className="bird-image"
+        alt="bird"
+      />
       <div className="bird-info">
         <h2 className="name">
           {`${

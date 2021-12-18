@@ -38,6 +38,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         total: state.total + action.payload,
       };
+    case "RESET_TOTAL":
+      return {
+        ...state,
+        total: action.payload,
+      };
     case "SET_COUNT":
       return {
         ...state,

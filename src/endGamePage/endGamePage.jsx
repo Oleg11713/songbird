@@ -3,12 +3,11 @@ import React from "react";
 import "./endGamePage.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setTotal } from "../redux/actions";
+import { resetTotal } from "../redux/actions";
 
 const EndGamePage = () => {
   const dispatch = useDispatch();
   const total = useSelector((state) => state.total);
-  console.log(total);
 
   return (
     <div className="end-game-page">
@@ -18,15 +17,13 @@ const EndGamePage = () => {
         <strong> 30</strong> возможных баллов
       </p>
       <hr className="area" />
-      <Link to="/">
-        <button
-          className="button-try-again"
-          onClick={() => {
-            dispatch(setTotal(0));
-          }}
-        >
-          Попробовать еще раз!
-        </button>
+      <Link
+        to="/"
+        onClick={() => {
+          dispatch(resetTotal(0));
+        }}
+      >
+        <button className="button-try-again">Попробовать еще раз!</button>
       </Link>
     </div>
   );
