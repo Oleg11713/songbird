@@ -21,14 +21,15 @@ const ButtonNext = () => {
         if (levelCompleted) {
           if (level < 5) {
             level++;
+            dispatch(isSelectedBirdExist(false));
           } else {
             history.push("/endGame");
             level = 0;
+            dispatch(isSelectedBirdExist(false));
           }
         }
         dispatch(setLevel(level));
         dispatch(isLevelCompleted(false));
-        dispatch(isSelectedBirdExist(false));
       }}
     >
       Next Level
