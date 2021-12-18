@@ -1,11 +1,17 @@
 import React from "react";
 
 import "./buttonNext.styles.scss";
-import { isLevelCompleted, setLevel } from "../../redux/actions";
+import {
+  isLevelCompleted,
+  isSelectedBirdExist,
+  setLevel,
+} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const ButtonNext = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   let level = useSelector((state) => state.level);
   const levelCompleted = useSelector((state) => state.levelCompleted);
   return (
@@ -14,14 +20,15 @@ const ButtonNext = () => {
       onClick={() => {
         if (levelCompleted) {
           if (level < 5) {
-            dispatch(isLevelCompleted(false));
             level++;
-            dispatch(setLevel(level));
           } else {
+            history.push("/endGame");
             level = 0;
-            dispatch(setLevel(level));
           }
         }
+        dispatch(setLevel(level));
+        dispatch(isLevelCompleted(false));
+        dispatch(isSelectedBirdExist(false));
       }}
     >
       Next Level

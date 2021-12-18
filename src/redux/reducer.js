@@ -5,8 +5,10 @@ export const INITIAL_STATE = {
   birds: birdsData,
   level: 0,
   total: 0,
+  count: 5,
   selectedBird: null,
   levelCompleted: false,
+  selectedBirdExist: false,
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +17,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedBird: action.payload,
+      };
+    case "IS_SELECTED_BIRD_EXIST":
+      return {
+        ...state,
+        selectedBirdExist: action.payload,
       };
     case "IS_LEVEL_COMPLETED":
       return {
@@ -30,6 +37,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         total: state.total + action.payload,
+      };
+    case "SET_COUNT":
+      return {
+        ...state,
+        count: action.payload,
       };
     case "SET_CURRENT_BIRD":
       return {

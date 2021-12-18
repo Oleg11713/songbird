@@ -6,14 +6,33 @@ import { useSelector } from "react-redux";
 
 const CurrentQuestion = ({ image, name, audio }) => {
   const selectedBird = useSelector((state) => state.selectedBird);
+  const selectedBirdExist = useSelector((state) => state.selectedBirdExist);
 
   return (
     <div className="current-question">
       <div className="bird-image-container">
-        <img src={`${image}`} className="bird-image" alt="bird" />
+        <img
+          src={`${
+            selectedBirdExist
+              ? selectedBird.name === name
+                ? image
+                : selectedBird.image
+              : image
+          }`}
+          className="bird-image"
+          alt="bird"
+        />
       </div>
       <div className="bird-info">
-        <h2 className="name">{`${true ? name : "******"}`}</h2>
+        <h2 className="name">
+          {`${
+            selectedBirdExist
+              ? selectedBird.name === name
+                ? name
+                : "******"
+              : "******"
+          }`}
+        </h2>
         <Audio audio={audio} />
       </div>
     </div>

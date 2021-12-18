@@ -3,6 +3,8 @@ import React from "react";
 import "./answerOptions.styles.scss";
 import {
   isLevelCompleted,
+  isSelectedBirdExist,
+  setCount,
   setSelectedBird,
   setTotal,
 } from "../../redux/actions";
@@ -10,10 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
-  const selectedBird = useSelector((state) => state.selectedBird);
   const levelCompleted = useSelector((state) => state.levelCompleted);
   const total = useSelector((state) => state.total);
-  let count = 5;
+  const count = useSelector((state) => state.count);
+
   return (
     <div className="answer-options">
       <ul className="answers-group">
@@ -24,19 +26,19 @@ const AnswerOptions = ({ birds, currentBird }) => {
             onClick={() => {
               console.log(count, total);
               dispatch(setSelectedBird(bird));
-              console.log(selectedBird, levelCompleted);
+              dispatch(isSelectedBirdExist(true));
               const click = document.querySelector(`#${bird.name}`);
               if (!levelCompleted) {
                 if (bird.name === currentBird.name) {
                   click.classList.add("won");
                   dispatch(isLevelCompleted(true));
                   dispatch(setTotal(count));
-                  count = 5;
+                  dispatch(setCount(5));
                 } else {
-                  if (click.classList.contains("won"))
-                    click.classList.remove("won");
+                  click.classList.remove("won");
+                  if (!click.classList.contains("lost"))
+                    dispatch(setCount(count - 1));
                   click.classList.add("lost");
-                  count--;
                 }
               }
             }}

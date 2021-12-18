@@ -3,6 +3,11 @@ export const setSelectedBird = (bird) => ({
   payload: bird,
 });
 
+export const isSelectedBirdExist = (selectedBirdExist) => ({
+  type: "IS_SELECTED_BIRD_EXIST",
+  payload: selectedBirdExist,
+});
+
 export const setLevel = (level) => ({
   type: "SET_LEVEL",
   payload: level,
@@ -11,6 +16,11 @@ export const setLevel = (level) => ({
 export const setTotal = (total) => ({
   type: "SET_TOTAL",
   payload: total,
+});
+
+export const setCount = (count) => ({
+  type: "SET_COUNT",
+  payload: count,
 });
 
 export const setCurrentBird = (bird) => ({
