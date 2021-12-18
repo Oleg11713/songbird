@@ -10,7 +10,6 @@ const CurrentQuestion = ({ image, name, audio }) => {
 
   return (
     <div className="current-question">
-      <div className="bird-image-container">
         <img
           src={`${
             selectedBirdExist
@@ -22,7 +21,6 @@ const CurrentQuestion = ({ image, name, audio }) => {
           className="bird-image"
           alt="bird"
         />
-      </div>
       <div className="bird-info">
         <h2 className="name">
           {`${

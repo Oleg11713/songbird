@@ -8,22 +8,40 @@
   background-color: #303030;
   font-size: 15px;
 
+  @media (max-width: 680px) {
+    width: 100%;
+  }
+
   .bird-info {
     display: flex;
     padding: 0;
     flex-direction: row;
     min-height: 173px;
 
+    @media (max-width: 550px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
     .image {
-      width: 200px;
+      width: 40%;
       height: 155px;
       border-radius: 10px;
       object-fit: cover;
-      margin-right: 2rem;
+      margin-right: 32px;
+
+      @media (max-width: 550px) {
+        margin-right: 0;
+        width: 200px;
+      }
     }
 
     .name-species-audio {
-      width: 70% ;
+      width: 70%;
+
+      @media (max-width: 550px) {
+        width: 100%;
+      }
 
       .name {
         margin: 0;
