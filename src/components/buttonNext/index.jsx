@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import {
-  isCorrectCurrentBird,
-  isLevelCompleted,
-  isSelectedBirdExist,
+  setIsCorrectCurrentBird,
+  setIsLevelCompleted,
   setLevel,
+  setSelectedBird,
 } from "../../redux/actions";
 
 import "./styles.scss";
@@ -14,25 +14,27 @@ import "./styles.scss";
 const ButtonNext = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const START_LEVEL = 1;
+
   let level = useSelector((state) => state.level);
-  const levelCompleted = useSelector((state) => state.levelCompleted);
+  const isLevelCompleted = useSelector((state) => state.isLevelCompleted);
+  const maxLevel = useSelector((state) => state.maxLevel);
   return (
     <button
-      className={`button-next ${levelCompleted ? "active" : ""}`}
+      className={`button-next ${isLevelCompleted ? "active" : ""}`}
       onClick={() => {
-        if (levelCompleted) {
-          if (level < 5) {
+        if (isLevelCompleted) {
+          if (level < maxLevel) {
             level++;
-            dispatch(isSelectedBirdExist(false));
           } else {
             history.push("/endGame");
-            level = 0;
-            dispatch(isSelectedBirdExist(false));
+            level = START_LEVEL;
           }
+          dispatch(setSelectedBird(null));
         }
-        dispatch(isCorrectCurrentBird(false));
+        dispatch(setIsCorrectCurrentBird(false));
         dispatch(setLevel(level));
-        dispatch(isLevelCompleted(false));
+        dispatch(setIsLevelCompleted(false));
       }}
     >
       Next Level

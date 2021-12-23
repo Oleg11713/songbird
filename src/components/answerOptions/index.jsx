@@ -2,12 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  isCorrectCurrentBird,
-  isLevelCompleted,
-  isSelectedBirdExist,
-  setCount,
+  setIsCorrectCurrentBird,
+  setIsLevelCompleted,
+  setScoreOnTheLevel,
   setSelectedBird,
-  setTotal,
+  setTotalScore,
 } from "../../redux/actions";
 import lostSound from "../../sounds/lost.mp3";
 import wonSound from "../../sounds/won.mp3";
@@ -16,8 +15,8 @@ import "./styles.scss";
 
 const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
-  const levelCompleted = useSelector((state) => state.levelCompleted);
-  const count = useSelector((state) => state.count);
+  const isLevelCompleted = useSelector((state) => state.isLevelCompleted);
+  const scoreOnTheLevel = useSelector((state) => state.scoreOnTheLevel);
 
   return (
     <div className="answer-options">
@@ -28,21 +27,20 @@ const AnswerOptions = ({ birds, currentBird }) => {
             className="answers-item"
             onClick={() => {
               dispatch(setSelectedBird(bird));
-              dispatch(isSelectedBirdExist(true));
               const click = document.querySelector(`#${bird.name}`);
-              if (!levelCompleted) {
+              if (!isLevelCompleted) {
                 if (bird.name === currentBird.name) {
                   click.classList.add("won");
                   new Audio(wonSound).play();
-                  dispatch(isCorrectCurrentBird(true));
-                  dispatch(isLevelCompleted(true));
-                  dispatch(setTotal(count));
-                  dispatch(setCount(5));
+                  dispatch(setIsCorrectCurrentBird(true));
+                  dispatch(setIsLevelCompleted(true));
+                  dispatch(setTotalScore(scoreOnTheLevel));
+                  dispatch(setScoreOnTheLevel(5));
                 } else {
                   click.classList.remove("won");
                   if (!click.classList.contains("lost")) {
                     new Audio(lostSound).play();
-                    dispatch(setCount(count - 1));
+                    dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
                   }
                   click.classList.add("lost");
                 }

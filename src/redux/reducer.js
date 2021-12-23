@@ -1,64 +1,60 @@
 import { createStore } from "redux";
 
 import { birdsData } from "../components/birds-data";
+import { actionTypes } from "./types";
+
+const START_LEVEL = 1;
+const START_TOTAL_SCORE = 0;
+const START_SCORE_ON_THE_LEVEL = 5;
+const MAX_LEVEL = 6;
 
 export const INITIAL_STATE = {
   birds: birdsData,
-  level: 0,
-  total: 0,
-  count: 5,
+  level: START_LEVEL,
+  totalScore: START_TOTAL_SCORE,
+  scoreOnTheLevel: START_SCORE_ON_THE_LEVEL,
   selectedBird: null,
-  levelCompleted: false,
-  selectedBirdExist: false,
-  correctCurrentBird: false,
+  isLevelCompleted: false,
+  isCorrectCurrentBird: false,
+  maxLevel: MAX_LEVEL,
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "SET_SELECTED_BIRD":
+    case actionTypes.SET_SELECTED_BIRD:
       return {
         ...state,
         selectedBird: action.payload,
       };
-    case "IS_SELECTED_BIRD_EXIST":
+    case actionTypes.SET_IS_LEVEL_COMPLETED:
       return {
         ...state,
-        selectedBirdExist: action.payload,
+        isLevelCompleted: action.payload,
       };
-    case "IS_LEVEL_COMPLETED":
+    case actionTypes.SET_IS_CORRECT_CURRENT_BIRD:
       return {
         ...state,
-        levelCompleted: action.payload,
+        isCorrectCurrentBird: action.payload,
       };
-    case "IS_CORRECT_CURRENT_BIRD":
-      return {
-        ...state,
-        correctCurrentBird: action.payload,
-      };
-    case "SET_LEVEL":
+    case actionTypes.SET_LEVEL:
       return {
         ...state,
         level: action.payload,
       };
-    case "SET_TOTAL":
+    case actionTypes.SET_TOTAL_SCORE:
       return {
         ...state,
-        total: state.total + action.payload,
+        totalScore: state.totalScore + action.payload,
       };
-    case "RESET_TOTAL":
+    case actionTypes.RESET_TOTAL_SCORE:
       return {
         ...state,
-        total: action.payload,
+        totalScore: action.payload,
       };
-    case "SET_COUNT":
+    case actionTypes.SET_SCORE_ON_THE_LEVEL:
       return {
         ...state,
-        count: action.payload,
-      };
-    case "SET_CURRENT_BIRD":
-      return {
-        ...state,
-        currentBird: action.payload,
+        scoreOnTheLevel: action.payload,
       };
     default:
       return state;

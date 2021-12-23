@@ -1,44 +1,36 @@
+import { actionTypes } from "./types";
+
 export const setSelectedBird = (bird) => ({
-  type: "SET_SELECTED_BIRD",
+  type: actionTypes.SET_SELECTED_BIRD,
   payload: bird,
 });
 
-export const isSelectedBirdExist = (selectedBirdExist) => ({
-  type: "IS_SELECTED_BIRD_EXIST",
-  payload: selectedBirdExist,
-});
-
-export const isCorrectCurrentBird = (correctCurrentBird) => ({
-  type: "IS_CORRECT_CURRENT_BIRD",
-  payload: correctCurrentBird,
+export const setIsCorrectCurrentBird = (isCorrectCurrentBird) => ({
+  type: actionTypes.SET_IS_CORRECT_CURRENT_BIRD,
+  payload: isCorrectCurrentBird,
 });
 
 export const setLevel = (level) => ({
-  type: "SET_LEVEL",
+  type: actionTypes.SET_LEVEL,
   payload: level,
 });
 
-export const setTotal = (total) => ({
-  type: "SET_TOTAL",
-  payload: total,
+export const setTotalScore = (totalScore) => ({
+  type: actionTypes.SET_TOTAL_SCORE,
+  payload: totalScore,
 });
 
-export const resetTotal = (total) => ({
-  type: "RESET_TOTAL",
-  payload: total,
+export const resetTotalScore = (totalScore) => ({
+  type: actionTypes.RESET_TOTAL_SCORE,
+  payload: totalScore,
 });
 
-export const setCount = (count) => ({
-  type: "SET_COUNT",
-  payload: count,
+export const setScoreOnTheLevel = (scoreOnTheLevel) => ({
+  type: actionTypes.SET_SCORE_ON_THE_LEVEL,
+  payload: scoreOnTheLevel,
 });
 
-export const setCurrentBird = (bird) => ({
-  type: "SET_CURRENT_BIRD",
-  payload: bird,
-});
-
-export const isLevelCompleted = (levelCompleted) => ({
-  type: "IS_LEVEL_COMPLETED",
-  payload: levelCompleted,
+export const setIsLevelCompleted = (isLevelCompleted) => ({
+  type: actionTypes.SET_IS_LEVEL_COMPLETED,
+  payload: isLevelCompleted,
 });
