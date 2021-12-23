@@ -15,10 +15,9 @@
   .bird-info {
     display: flex;
     padding: 0;
-    flex-direction: row;
     min-height: 173px;
 
-    @media (max-width: 550px) {
+    @media (max-width: 788px) {
       flex-direction: column;
       align-items: center;
     }
@@ -30,7 +29,7 @@
       object-fit: cover;
       margin-right: 32px;
 
-      @media (max-width: 550px) {
+      @media (max-width: 788px) {
         margin-right: 0;
         width: 200px;
       }
@@ -39,7 +38,7 @@
     .name-species-audio {
       width: 70%;
 
-      @media (max-width: 550px) {
+      @media (max-width: 788px) {
         width: 100%;
       }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import Audio from "../audio";
+import AudioPlayer from "../audio";
 import startBird from "../../assets/startBird.jpg";
 
 import "./styles.scss";
@@ -38,7 +38,7 @@ const CurrentQuestion = ({ image, name, audio }) => {
               : "******"
           }`}
         </h2>
-        <Audio audio={audio} />
+        <AudioPlayer audio={audio} />
       </div>
     </div>
   );

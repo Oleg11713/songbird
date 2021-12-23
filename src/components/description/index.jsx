@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import Audio from "../audio";
+import AudioPlayer from "../audio";
 
 import "./styles.scss";
 
@@ -26,7 +26,7 @@ const Description = () => {
               <div className="name-species-audio">
                 <h3 className="name">{selectedBird.name}</h3>
                 <h4 className="species">{selectedBird.species}</h4>
-                <Audio audio={selectedBird.audio} />
+                <AudioPlayer audio={selectedBird.audio} />
               </div>
             </div>
             <p className="bird-description">{selectedBird.description}</p>
