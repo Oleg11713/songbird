@@ -1,5 +1,6 @@
-import { birdsData } from "../components/birds-data";
 import { createStore } from "redux";
+
+import { birdsData } from "../components/birds-data";
 
 export const INITIAL_STATE = {
   birds: birdsData,

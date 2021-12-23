@@ -1,13 +1,13 @@
 import React from "react";
+import { Route } from "react-router-dom";
+
+import Header from "./components/header";
+import Homepage from "./homepage";
+import EndGamePage from "./endGamePage";
 
 import "./App.css";
-import Header from "./components/header/header.component";
-import Homepage from "./homepage/homepage";
-import { Route } from "react-router-dom";
-import EndGamePage from "./endGamePage/endGamePage";
 
 const App = () => {
-
   return (
     <div className="container">
       <Header />
