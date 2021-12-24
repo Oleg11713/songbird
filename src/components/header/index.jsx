@@ -31,9 +31,7 @@ const Header = () => {
       </div>
       <ul className="pagination">
         {questionTopics.map((questionTopic, index) => (
-          <li className={`nav-item ${level === index + 1 ? "active" : ""}`}>
-            {questionTopic}
-          </li>
+          <li key={index} className={`nav-item ${level === (index + 1) ? "active" : ""}`}>{questionTopic}</li>
         ))}
       </ul>
     </div>

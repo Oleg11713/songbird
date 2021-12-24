@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import AudioPlayer from "../audio";
 import startBirdImage from "../../assets/startBird.jpg";
+import AudioPlayer from "../audio";
 
 import "./styles.scss";
 

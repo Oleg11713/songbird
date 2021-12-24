@@ -1,17 +1,8 @@
-.audio {
-  width: 100%;
-  transition: all 0.5s linear;
+.audio-bar {
+  display: flex;
 }
 
-audio::-webkit-media-controls-panel {
-  background: linear-gradient(
-    to right,
-    rgb(0, 188, 140) 0%,
-    rgb(61, 133, 140) 84.8703%,
-  );
-}
-
-audio::-webkit-media-controls-time-remaining-display,
-audio::-webkit-media-controls-current-time-display {
-  color: white;
+.audio-slider {
+  width: 90%;
+  margin-top: 3px;
 }

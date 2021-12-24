@@ -31,7 +31,9 @@ const AnswerOptions = ({ birds, currentBird }) => {
               if (!isLevelCompleted) {
                 if (bird.name === currentBird.name) {
                   click.classList.add("won");
-                  new Audio(wonSound).play();
+                  const sound = new Audio(wonSound);
+                  sound.volume = 0.1;
+                  sound.play();
                   dispatch(setIsCorrectCurrentBird(true));
                   dispatch(setIsLevelCompleted(true));
                   dispatch(setTotalScore(scoreOnTheLevel));
@@ -39,7 +41,9 @@ const AnswerOptions = ({ birds, currentBird }) => {
                 } else {
                   click.classList.remove("won");
                   if (!click.classList.contains("lost")) {
-                    new Audio(lostSound).play();
+                    const sound = new Audio(lostSound);
+                    sound.volume = 0.1;
+                    sound.play();
                     dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
                   }
                   click.classList.add("lost");

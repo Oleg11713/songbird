@@ -36,11 +36,7 @@
     }
 
     .name-species-audio {
-      width: 70%;
-
-      @media (max-width: 788px) {
-        width: 100%;
-      }
+      width: 100%;
 
       .name {
         margin: 0;
