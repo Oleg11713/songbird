@@ -1,17 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import AudioPlayer from "../audio";
+import { selectSelectedBird } from "../../redux/selectors";
 
 import "./styles.scss";
 
-const Description = () => {
-  const selectedBird = useSelector((state) => state.selectedBird);
-
+const Description = ({ selectedBird }) => {
   return (
-    <div
-      className="description"
-    >
+    <div className="description">
       {selectedBird ? (
         <div className="bird-description">
           <div className="bird-info">
@@ -35,4 +33,9 @@ const Description = () => {
   );
 };
 
-export default Description;
+const mapStateToProps = () =>
+  createStructuredSelector({
+    selectedBird: selectSelectedBird,
+  });
+
+export default connect(mapStateToProps)(Description);

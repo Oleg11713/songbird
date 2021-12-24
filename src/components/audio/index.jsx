@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 
 import Slider from "../slider/Slider";
 import ControlPanel from "../controls/ControlPanel";
+import Button from "../controls/Button";
 
 import "./styles.scss";
-import Button from "../controls/Button";
 
 const AudioPlayer = ({ audio }) => {
   const [percentage, setPercentage] = useState(0);

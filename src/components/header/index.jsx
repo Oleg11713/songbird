@@ -1,14 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { selectLevel, selectTotalScore } from "../../redux/selectors";
 
 import "./styles.scss";
 
-const Header = () => {
-  const totalScore = useSelector((state) => state.totalScore);
-  const level = useSelector((state) => state.level);
-
+const Header = ({ level, totalScore }) => {
   const questionTopics = [
     "Разминка",
     "Воробьиные",
@@ -31,11 +30,22 @@ const Header = () => {
       </div>
       <ul className="pagination">
         {questionTopics.map((questionTopic, index) => (
-          <li key={index} className={`nav-item ${level === (index + 1) ? "active" : ""}`}>{questionTopic}</li>
+          <li
+            key={index}
+            className={`nav-item ${level === index + 1 ? "active" : ""}`}
+          >
+            {questionTopic}
+          </li>
         ))}
       </ul>
     </div>
   );
 };
 
-export default Header;
+const mapStateToProps = () =>
+  createStructuredSelector({
+    level: selectLevel,
+    totalScore: selectTotalScore,
+  });
+
+export default connect(mapStateToProps)(Header);

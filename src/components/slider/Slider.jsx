@@ -21,7 +21,7 @@ const Slider = ({ percentage = 0, onChange }) => {
       (thumbWidth / 100) * percentage;
     setPosition(percentage);
     setMarginLeft(centerThumb);
-    setProgressBarWidth(centerProgressBar/7.5);
+    setProgressBarWidth(centerProgressBar / 7.5);
   }, [percentage]);
 
   return (

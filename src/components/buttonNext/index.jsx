@@ -1,6 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import {
   setIsCorrectCurrentBird,
@@ -8,17 +10,19 @@ import {
   setLevel,
   setSelectedBird,
 } from "../../redux/actions";
+import {
+    selectIsLevelCompleted,
+    selectLevel,
+    selectMaxLevel,
+} from "../../redux/selectors";
 
 import "./styles.scss";
 
-const ButtonNext = () => {
+const ButtonNext = ({ isLevelCompleted, level, maxLevel }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const START_LEVEL = 1;
 
-  let level = useSelector((state) => state.level);
-  const isLevelCompleted = useSelector((state) => state.isLevelCompleted);
-  const maxLevel = useSelector((state) => state.maxLevel);
   return (
     <button
       className={`button-next ${isLevelCompleted ? "active" : ""}`}
@@ -42,4 +46,11 @@ const ButtonNext = () => {
   );
 };
 
-export default ButtonNext;
+const mapStateToProps = () =>
+  createStructuredSelector({
+    level: selectLevel,
+    isLevelCompleted: selectIsLevelCompleted,
+    maxLevel: selectMaxLevel,
+  });
+
+export default connect(mapStateToProps)(ButtonNext);
