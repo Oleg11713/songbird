@@ -1,8 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 
 import {
   setIsCorrectCurrentBird,
@@ -11,16 +9,19 @@ import {
   setSelectedBird,
 } from "../../redux/actions";
 import {
-    selectIsLevelCompleted,
-    selectLevel,
-    selectMaxLevel,
+  selectIsLevelCompleted,
+  selectLevel,
+  selectMaxLevel,
 } from "../../redux/selectors";
 
 import "./styles.scss";
 
-const ButtonNext = ({ isLevelCompleted, level, maxLevel }) => {
+const ButtonNext = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  let level = useSelector(selectLevel);
+  const isLevelCompleted = useSelector(selectIsLevelCompleted);
+  const maxLevel = useSelector(selectMaxLevel);
   const START_LEVEL = 1;
 
   return (
@@ -46,11 +47,4 @@ const ButtonNext = ({ isLevelCompleted, level, maxLevel }) => {
   );
 };
 
-const mapStateToProps = () =>
-  createStructuredSelector({
-    level: selectLevel,
-    isLevelCompleted: selectIsLevelCompleted,
-    maxLevel: selectMaxLevel,
-  });
-
-export default connect(mapStateToProps)(ButtonNext);
+export default ButtonNext;

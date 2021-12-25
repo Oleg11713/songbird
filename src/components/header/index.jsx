@@ -1,13 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectLevel, selectTotalScore } from "../../redux/selectors";
 
 import "./styles.scss";
 
-const Header = ({ level, totalScore }) => {
+const Header = () => {
   const questionTopics = [
     "Разминка",
     "Воробьиные",
@@ -16,6 +15,8 @@ const Header = ({ level, totalScore }) => {
     "Хищные птицы",
     "Морские птицы",
   ];
+  const totalScore = useSelector(selectTotalScore);
+  const level = useSelector(selectLevel);
 
   return (
     <div className="header-container">
@@ -42,10 +43,4 @@ const Header = ({ level, totalScore }) => {
   );
 };
 
-const mapStateToProps = () =>
-  createStructuredSelector({
-    level: selectLevel,
-    totalScore: selectTotalScore,
-  });
-
-export default connect(mapStateToProps)(Header);
+export default Header;

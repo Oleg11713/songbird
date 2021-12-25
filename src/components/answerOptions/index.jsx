@@ -1,7 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   setIsCorrectCurrentBird,
@@ -13,19 +11,16 @@ import {
 import lostSound from "../../sounds/lost.mp3";
 import wonSound from "../../sounds/won.mp3";
 import {
-    selectIsLevelCompleted,
-    selectScoreOnTheLevel,
+  selectIsLevelCompleted,
+  selectScoreOnTheLevel,
 } from "../../redux/selectors";
 
 import "./styles.scss";
 
-const AnswerOptions = ({
-  birds,
-  currentBird,
-  isLevelCompleted,
-  scoreOnTheLevel,
-}) => {
+const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
+  const isLevelCompleted = useSelector(selectIsLevelCompleted);
+  const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);
 
   return (
     <div className="answer-options">
@@ -69,10 +64,4 @@ const AnswerOptions = ({
   );
 };
 
-const mapStateToProps = () =>
-  createStructuredSelector({
-    isLevelCompleted: selectIsLevelCompleted,
-    scoreOnTheLevel: selectScoreOnTheLevel,
-  });
-
-export default connect(mapStateToProps)(AnswerOptions);
+export default AnswerOptions;

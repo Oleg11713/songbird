@@ -1,23 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
 
 import startBirdImage from "../../assets/startBird.jpg";
 import AudioPlayer from "../audio";
 import {
-    selectIsCorrectCurrentBird,
-    selectSelectedBird,
+  selectIsCorrectCurrentBird,
+  selectSelectedBird,
 } from "../../redux/selectors";
 
 import "./styles.scss";
 
-const CurrentQuestion = ({
-  image,
-  name,
-  audio,
-  isCorrectCurrentBird,
-  selectedBird,
-}) => {
+const CurrentQuestion = ({ image, name, audio }) => {
+  const isCorrectCurrentBird = useSelector(selectIsCorrectCurrentBird);
+  const selectedBird = useSelector(selectSelectedBird);
+
   const START_NAME_OF_THE_HIDDEN_BIRD = "******";
 
   const imageIfSelectedBirdExist = selectedBird
@@ -49,10 +45,4 @@ const CurrentQuestion = ({
   );
 };
 
-const mapStateToProps = () =>
-  createStructuredSelector({
-    isCorrectCurrentBird: selectIsCorrectCurrentBird,
-    selectedBird: selectSelectedBird,
-  });
-
-export default connect(mapStateToProps)(CurrentQuestion);
+export default CurrentQuestion;

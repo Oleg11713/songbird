@@ -1,16 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 
 import { resetTotalScore } from "../redux/actions";
 import { selectTotalScore } from "../redux/selectors";
 
 import "./styles.scss";
 
-const EndGamePage = ({ totalScore }) => {
+const EndGamePage = () => {
   const dispatch = useDispatch();
+  const totalScore = useSelector(selectTotalScore);
 
   return (
     <div className="end-game-page">
@@ -32,9 +31,4 @@ const EndGamePage = ({ totalScore }) => {
   );
 };
 
-const mapStateToProps = () =>
-  createStructuredSelector({
-    totalScore: selectTotalScore,
-  });
-
-export default connect(mapStateToProps)(EndGamePage);
+export default EndGamePage;

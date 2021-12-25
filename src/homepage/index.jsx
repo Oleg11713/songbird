@@ -1,13 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
 
 import CurrentQuestion from "../components/currentQuestion";
 import AnswerArea from "../components/answerArea";
 import ButtonNext from "../components/buttonNext";
 import { selectBirds, selectLevel } from "../redux/selectors";
 
-const Homepage = ({ birds, level }) => {
+const Homepage = () => {
+  const birds = useSelector(selectBirds);
+  const level = useSelector(selectLevel);
+
   const currentBird =
     birds[level - 1][Math.floor(Math.random() * birds[level - 1].length)];
 
@@ -24,10 +26,4 @@ const Homepage = ({ birds, level }) => {
   );
 };
 
-const mapStateToProps = () =>
-  createStructuredSelector({
-    birds: selectBirds,
-    level: selectLevel,
-  });
-
-export default connect(mapStateToProps)(Homepage);
+export default Homepage;
