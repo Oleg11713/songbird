@@ -32,7 +32,7 @@ const Header = () => {
       <ul className="pagination">
         {questionTopics.map((questionTopic, index) => (
           <li
-            key={index}
+            key={questionTopic}
             className={`nav-item ${level === index + 1 ? "active" : ""}`}
           >
             {questionTopic}

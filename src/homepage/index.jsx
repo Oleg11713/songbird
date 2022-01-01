@@ -9,10 +9,10 @@ import { selectLevel } from "../redux/progress/selectors";
 
 const Homepage = () => {
   const birds = useSelector(selectBirds);
-  const level = useSelector(selectLevel);
+  const level = useSelector(selectLevel) - 1;
 
   const currentBird =
-    birds[level - 1][Math.floor(Math.random() * birds[level - 1].length)];
+    birds[level][Math.floor(Math.random() * birds[level].length)];
 
   return (
     <div>
@@ -21,7 +21,7 @@ const Homepage = () => {
         audio={currentBird.audio}
         image={currentBird.image}
       />
-      <AnswerArea birds={birds[level - 1]} currentBird={currentBird} />
+      <AnswerArea birds={birds[level]} currentBird={currentBird} />
       <ButtonNext />
     </div>
   );

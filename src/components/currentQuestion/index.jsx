@@ -16,17 +16,13 @@ const CurrentQuestion = ({ image, name, audio }) => {
 
   const START_NAME_OF_THE_HIDDEN_BIRD = "******";
 
-  const imageIfSelectedBirdExist = selectedBird
-    ? selectedBird.name === name
+  const imageIfSelectedBirdExist = selectedBird && selectedBird.name === name
       ? image
-      : startBirdImage
-    : startBirdImage;
+      : startBirdImage;
 
-  const nameIfSelectedBirdExist = selectedBird
-    ? selectedBird.name === name
+  const nameIfSelectedBirdExist = selectedBird && selectedBird.name === name
       ? name
-      : START_NAME_OF_THE_HIDDEN_BIRD
-    : START_NAME_OF_THE_HIDDEN_BIRD;
+      : START_NAME_OF_THE_HIDDEN_BIRD;
 
   return (
     <div className="current-question">
@@ -36,9 +32,9 @@ const CurrentQuestion = ({ image, name, audio }) => {
         alt="bird"
       />
       <div className="bird-info">
-        <h2 className="name">
+        <div className="name">
           {`${isCorrectCurrentBird ? name : nameIfSelectedBirdExist}`}
-        </h2>
+        </div>
         <AudioPlayer audio={audio} />
       </div>
     </div>

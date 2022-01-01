@@ -16,8 +16,8 @@ const Description = () => {
           <div className="bird-info">
             <img src={`${selectedBird.image}`} className="image" alt="bird" />
             <div className="name-species-audio">
-              <h3 className="name">{selectedBird.name}</h3>
-              <h4 className="species">{selectedBird.species}</h4>
+              <div className="name">{selectedBird.name}</div>
+              <div className="species">{selectedBird.species}</div>
               <AudioPlayer audio={selectedBird.audio} />
             </div>
           </div>

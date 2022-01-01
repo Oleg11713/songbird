@@ -45,7 +45,7 @@ const Slider = ({ percentage = 0, onChange }) => {
       />
       <input
         type="range"
-        value={position}
+        value={position.toString()}
         ref={rangeRef}
         step="0.01"
         className="range"

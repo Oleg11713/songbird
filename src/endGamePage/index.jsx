@@ -14,7 +14,7 @@ const EndGamePage = () => {
   return (
     <div className="end-game-page">
       <h1 className="title">Поздравляем!</h1>
-      <p className="end-game-congratulations">
+      <p className="congratulations">
         Вы прошли викторину и набрали <strong>{totalScore}</strong> из
         <strong> 30</strong> возможных баллов
       </p>
