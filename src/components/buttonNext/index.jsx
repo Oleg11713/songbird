@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import {
-  setIsCorrectCurrentBird,
-  setIsLevelCompleted,
-  setLevel,
-  setSelectedBird,
-} from "../../redux/actions";
-import {
   selectIsLevelCompleted,
   selectLevel,
   selectMaxLevel,
-} from "../../redux/selectors";
+} from "../../redux/progress/selectors";
+import {
+  setIsCorrectCurrentBird,
+  setSelectedBird,
+} from "../../redux/birds/actions";
+import { setIsLevelCompleted, setLevel } from "../../redux/progress/actions";
 
 import "./styles.scss";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { selectLevel, selectTotalScore } from "../../redux/selectors";
+import { selectLevel, selectTotalScore } from "../../redux/progress/selectors";
 
 import "./styles.scss";
 

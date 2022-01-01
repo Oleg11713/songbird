@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { resetTotalScore } from "../redux/actions";
-import { selectTotalScore } from "../redux/selectors";
+import { resetTotalScore } from "../redux/progress/actions";
+import { selectTotalScore } from "../redux/progress/selectors";
 
 import "./styles.scss";
 

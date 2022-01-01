@@ -6,7 +6,7 @@ import AudioPlayer from "../audio";
 import {
   selectIsCorrectCurrentBird,
   selectSelectedBird,
-} from "../../redux/selectors";
+} from "../../redux/birds/selectors";
 
 import "./styles.scss";
 

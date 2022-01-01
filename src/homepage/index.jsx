@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import CurrentQuestion from "../components/currentQuestion";
 import AnswerArea from "../components/answerArea";
 import ButtonNext from "../components/buttonNext";
-import { selectBirds, selectLevel } from "../redux/selectors";
+import { selectBirds } from "../redux/birds/selectors";
+import { selectLevel } from "../redux/progress/selectors";
 
 const Homepage = () => {
   const birds = useSelector(selectBirds);

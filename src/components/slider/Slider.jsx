@@ -4,6 +4,9 @@ import "./slider.scss";
 import "./thumb.scss";
 
 const Slider = ({ percentage = 0, onChange }) => {
+  const PERCENTAGE = 100;
+  const PIXELS_IN_PERCENTAGE = 7.5;
+
   const [position, setPosition] = useState(0);
   const [marginLeft, setMarginLeft] = useState(0);
   const [progressBarWidth, setProgressBarWidth] = useState(0);
@@ -14,14 +17,14 @@ const Slider = ({ percentage = 0, onChange }) => {
   useEffect(() => {
     const rangeWidth = rangeRef.current.getBoundingClientRect().width;
     const thumbWidth = thumbRef.current.getBoundingClientRect().width;
-    const centerThumb = (thumbWidth / 100) * percentage * -1;
+    const centerThumb = (thumbWidth / PERCENTAGE) * percentage * -1;
     const centerProgressBar =
       thumbWidth +
-      (rangeWidth / 100) * percentage -
-      (thumbWidth / 100) * percentage;
+      (rangeWidth / PERCENTAGE) * percentage -
+      (thumbWidth / PERCENTAGE) * percentage;
     setPosition(percentage);
     setMarginLeft(centerThumb);
-    setProgressBarWidth(centerProgressBar / 7.5);
+    setProgressBarWidth(centerProgressBar / PIXELS_IN_PERCENTAGE);
   }, [percentage]);
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import AudioPlayer from "../audio";
-import { selectSelectedBird } from "../../redux/selectors";
+import { selectSelectedBird } from "../../redux/birds/selectors";
 
 import "./styles.scss";
 

@@ -1,23 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  setIsCorrectCurrentBird,
-  setIsLevelCompleted,
-  setScoreOnTheLevel,
-  setSelectedBird,
-  setTotalScore,
-} from "../../redux/actions";
 import lostSound from "../../sounds/lost.mp3";
 import wonSound from "../../sounds/won.mp3";
 import {
   selectIsLevelCompleted,
   selectScoreOnTheLevel,
-} from "../../redux/selectors";
+} from "../../redux/progress/selectors";
+import {
+  setIsCorrectCurrentBird,
+  setSelectedBird,
+} from "../../redux/birds/actions";
+import {
+  setIsLevelCompleted,
+  setScoreOnTheLevel,
+  setTotalScore,
+} from "../../redux/progress/actions";
 
 import "./styles.scss";
 
 const AnswerOptions = ({ birds, currentBird }) => {
+  const SOUND_VOLUME = 0.1;
+  const MAX_SCORE_ON_THE_LEVEL = 5;
+
   const dispatch = useDispatch();
   const isLevelCompleted = useSelector(selectIsLevelCompleted);
   const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);
@@ -36,17 +41,17 @@ const AnswerOptions = ({ birds, currentBird }) => {
                 if (bird.name === currentBird.name) {
                   click.classList.add("won");
                   const sound = new Audio(wonSound);
-                  sound.volume = 0.1;
+                  sound.volume = SOUND_VOLUME;
                   sound.play();
                   dispatch(setIsCorrectCurrentBird(true));
                   dispatch(setIsLevelCompleted(true));
                   dispatch(setTotalScore(scoreOnTheLevel));
-                  dispatch(setScoreOnTheLevel(5));
+                  dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
                 } else {
                   click.classList.remove("won");
                   if (!click.classList.contains("lost")) {
                     const sound = new Audio(lostSound);
-                    sound.volume = 0.1;
+                    sound.volume = SOUND_VOLUME;
                     sound.play();
                     dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
                   }

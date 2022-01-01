@@ -3,27 +3,31 @@ import React from "react";
 import "./control-panel.scss";
 
 const ControlPanel = ({ duration, currentTime }) => {
+  const HOUR_IN_SECONDS = 3600;
+  const MINUTE_IN_SECONDS = 60;
+  const TEN = 10;
+
   function secondsToHms(seconds) {
     if (!seconds) return "00:00";
 
     let duration = seconds;
-    let hours = duration / 3600;
-    duration = duration % 3600;
+    let hours = duration / HOUR_IN_SECONDS;
+    duration = duration % HOUR_IN_SECONDS;
 
-    let min = parseInt(duration / 60);
-    duration = duration % 60;
+    let min = parseInt(duration / MINUTE_IN_SECONDS);
+    duration = duration % MINUTE_IN_SECONDS;
 
     let sec = parseInt(duration);
 
-    if (sec < 10) {
+    if (sec < TEN) {
       sec = `0${sec}`;
     }
-    if (min < 10) {
+    if (min < TEN) {
       min = `0${min}`;
     }
 
-    if (parseInt(hours, 10) > 0) {
-      return `${parseInt(hours, 10)}:${min}:${sec}`;
+    if (parseInt(hours, TEN) > 0) {
+      return `${parseInt(hours, TEN)}:${min}:${sec}`;
     } else if (min === 0) {
       return `00:${sec}`;
     } else {

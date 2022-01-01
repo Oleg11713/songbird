@@ -7,6 +7,9 @@ import Button from "../controls/Button";
 import "./styles.scss";
 
 const AudioPlayer = ({ audio }) => {
+  const PERCENTAGE = 100;
+  const AUDIO_VOLUME = 0.4;
+
   const [percentage, setPercentage] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -16,13 +19,13 @@ const AudioPlayer = ({ audio }) => {
 
   const onChange = (e) => {
     const audio = audioRef.current;
-    audio.currentTime = (audio.duration / 100) * e.target.value;
+    audio.currentTime = (audio.duration / PERCENTAGE) * e.target.value;
     setPercentage(e.target.value);
   };
 
   const play = () => {
     const audio = audioRef.current;
-    audio.volume = 0.4;
+    audio.volume = AUDIO_VOLUME;
 
     if (!isPlaying) {
       setIsPlaying(true);
@@ -38,7 +41,7 @@ const AudioPlayer = ({ audio }) => {
   const getCurrDuration = (e) => {
     const percent = (
       (e.currentTarget.currentTime / e.currentTarget.duration) *
-      100
+      PERCENTAGE
     ).toFixed(2);
     const time = e.currentTarget.currentTime;
 
