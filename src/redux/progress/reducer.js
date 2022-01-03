@@ -1,5 +1,3 @@
-import { createStore } from "redux";
-
 import { actionTypes } from "./types";
 
 const START_LEVEL = 1;
@@ -46,5 +44,3 @@ export const progressReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
-export const store = createStore(progressReducer);

@@ -1,5 +1,3 @@
-import { createStore } from "redux";
-
 import { birdsData } from "../../components/birds-data";
 import { actionTypes } from "./types";
 
@@ -25,5 +23,3 @@ export const birdsReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
-export const store = createStore(birdsReducer);
