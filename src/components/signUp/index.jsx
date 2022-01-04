@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import FormInput from "../formInput";
 import CustomButton from "../customButton";
 
-import { auth, createUserProfileDocument } from "../../firebase/utils";
-
 import "./styles.scss";
 
 const SignUp = () => {
@@ -19,34 +17,6 @@ const SignUp = () => {
   const { firstName, secondName, email, password, confirmPassword } =
     userCredentials;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (password !== confirmPassword) {
-      alert("passwords don't match");
-      return;
-    }
-
-    try {
-         const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await createUserProfileDocument(user, { firstName, secondName });
-
-      setUserCredentials({
-        firstName: "",
-        secondName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -57,7 +27,7 @@ const SignUp = () => {
     <div className="sign-up">
       <h2 className="title">I don't have an account</h2>
       <span>Sign up with your email and password</span>
-      <form className="sign-up-form" onSubmit={handleSubmit}>
+      <form className="sign-up-form" onSubmit={() => console.log("hi")}>
         <FormInput
           type="text"
           name="firstName"

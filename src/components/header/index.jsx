@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectLevel, selectTotalScore } from "../../redux/progress/selectors";
-import { selectCurrentUser } from "../../redux/user/selectors";
-import { auth } from "../../firebase/utils";
+import { Context } from "../../index";
 
 import "./styles.scss";
 
@@ -20,7 +20,8 @@ const Header = () => {
   ];
   const totalScore = useSelector(selectTotalScore);
   const level = useSelector(selectLevel);
-  const currentUser = useSelector(selectCurrentUser);
+  const { auth } = useContext(Context);
+  const [user] = useAuthState(auth);
 
   return (
     <div className="header-container">
@@ -31,7 +32,7 @@ const Header = () => {
               <Logo className="logo" />
             </Link>
           </div>
-          {currentUser ? (
+          {user ? (
             <div className="score-title">
               Score:
               <span className="score-count"> {totalScore}</span>
@@ -40,7 +41,7 @@ const Header = () => {
             <div />
           )}
         </div>
-        {currentUser ? (
+        {user ? (
           <Link
             className="sign-in-and-sign-up-link"
             to="/"

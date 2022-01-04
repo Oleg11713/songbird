@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import firebase from "firebase/compat";
 
 import FormInput from "../formInput";
 import CustomButton from "../customButton";
-
-import { auth, signInWithGoogle } from "../../firebase/utils";
+import { Context } from "../../index";
 
 import "./styles.scss";
 
@@ -12,6 +12,13 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const { auth } = useContext(Context);
+
+  const login = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const { user } = await auth.signInWithPopup(provider);
+    console.log(user);
+  };
 
   const { email, password } = userCredentials;
 
@@ -55,8 +62,8 @@ const SignIn = () => {
           required
         />
         <div className="buttons">
-          <CustomButton type="submit"> Sign in </CustomButton>
-          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+          <CustomButton type="submit">Sign in</CustomButton>
+          <CustomButton onClick={login} isGoogleSignIn>
             Sign in with Google
           </CustomButton>
         </div>

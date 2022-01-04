@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import lostSound from "../../sounds/lost.mp3";
@@ -18,6 +18,8 @@ import {
 } from "../../redux/progress/actions";
 
 import "./styles.scss";
+import { Context } from "../../index";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const AnswerOptions = ({ birds, currentBird }) => {
   const SOUND_VOLUME = 0.1;
@@ -26,6 +28,8 @@ const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
   const isLevelCompleted = useSelector(selectIsLevelCompleted);
   const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);
+  const { auth } = useContext(Context);
+  const [user] = useAuthState(auth);
 
   return (
     <div className="answer-options">
@@ -35,27 +39,29 @@ const AnswerOptions = ({ birds, currentBird }) => {
             key={bird.name}
             className="answers-item"
             onClick={() => {
-              dispatch(setSelectedBird(bird));
-              const click = document.querySelector(`#${bird.name}`);
-              if (!isLevelCompleted) {
-                if (bird.name === currentBird.name) {
-                  click.classList.add("won");
-                  const sound = new Audio(wonSound);
-                  sound.volume = SOUND_VOLUME;
-                  sound.play();
-                  dispatch(setIsCorrectCurrentBird(true));
-                  dispatch(setIsLevelCompleted(true));
-                  dispatch(setTotalScore(scoreOnTheLevel));
-                  dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
-                } else {
-                  click.classList.remove("won");
-                  if (!click.classList.contains("lost")) {
-                    const sound = new Audio(lostSound);
+              if (user) {
+                dispatch(setSelectedBird(bird));
+                const click = document.querySelector(`#${bird.name}`);
+                if (!isLevelCompleted) {
+                  if (bird.name === currentBird.name) {
+                    click.classList.add("won");
+                    const sound = new Audio(wonSound);
                     sound.volume = SOUND_VOLUME;
                     sound.play();
-                    dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
+                    dispatch(setIsCorrectCurrentBird(true));
+                    dispatch(setIsLevelCompleted(true));
+                    dispatch(setTotalScore(scoreOnTheLevel));
+                    dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
+                  } else {
+                    click.classList.remove("won");
+                    if (!click.classList.contains("lost")) {
+                      const sound = new Audio(lostSound);
+                      sound.volume = SOUND_VOLUME;
+                      sound.play();
+                      dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
+                    }
+                    click.classList.add("lost");
                   }
-                  click.classList.add("lost");
                 }
               }
             }}

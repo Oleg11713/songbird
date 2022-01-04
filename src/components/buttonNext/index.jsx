@@ -16,12 +16,13 @@ import { setIsLevelCompleted, setLevel } from "../../redux/progress/actions";
 import "./styles.scss";
 
 const ButtonNext = () => {
+  const START_LEVEL = 1;
+
   const dispatch = useDispatch();
   const history = useHistory();
   let level = useSelector(selectLevel);
   const isLevelCompleted = useSelector(selectIsLevelCompleted);
   const maxLevel = useSelector(selectMaxLevel);
-  const START_LEVEL = 1;
 
   return (
     <button

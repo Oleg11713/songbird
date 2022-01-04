@@ -2,7 +2,7 @@ import firebase from "firebase/compat";
 import "firebase/firestore";
 import "firebase/auth";
 
-const config = {
+firebase.initializeApp({
   apiKey: "AIzaSyAeFnC-Emz4SVnuszbN0wxi8pBhNg2A8hQ",
   authDomain: "songbird-41f8d.firebaseapp.com",
   projectId: "songbird-41f8d",
@@ -10,42 +10,7 @@ const config = {
   messagingSenderId: "348563519581",
   appId: "1:348563519581:web:764bda33cdebf4ecf4f5b4",
   measurementId: "G-HQEX45HXBE",
-};
-
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
-
-  const userRef = firestore.doc(`users/${userAuth.uid}`);
-
-  const snapShot = await userRef.get();
-
-  if (!snapShot.exists) {
-    const { firstName, secondName, email } = userAuth;
-    const createdAt = new Date();
-
-    try {
-      await userRef.set({
-        firstName,
-        secondName,
-        email,
-        createdAt,
-        ...additionalData,
-      });
-    } catch (error) {
-      console.log("error creating user", error.message());
-    }
-  }
-
-  return userRef;
-};
-
-firebase.initializeApp(config);
+});
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
-export default firebase;
