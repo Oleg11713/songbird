@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import lostSound from "../../sounds/lost.mp3";
@@ -16,10 +16,9 @@ import {
   setScoreOnTheLevel,
   setTotalScore,
 } from "../../redux/progress/actions";
+import { selectCurrentUser } from "../../redux/user/selectors";
 
 import "./styles.scss";
-import { Context } from "../../index";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 const AnswerOptions = ({ birds, currentBird }) => {
   const SOUND_VOLUME = 0.1;
@@ -28,8 +27,7 @@ const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
   const isLevelCompleted = useSelector(selectIsLevelCompleted);
   const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);
-  const { auth } = useContext(Context);
-  const [user] = useAuthState(auth);
+  const currentUser = useSelector(selectCurrentUser);
 
   return (
     <div className="answer-options">
@@ -39,7 +37,7 @@ const AnswerOptions = ({ birds, currentBird }) => {
             key={bird.name}
             className="answers-item"
             onClick={() => {
-              if (user) {
+              if (currentUser) {
                 dispatch(setSelectedBird(bird));
                 const click = document.querySelector(`#${bird.name}`);
                 if (!isLevelCompleted) {

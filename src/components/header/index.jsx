@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectLevel, selectTotalScore } from "../../redux/progress/selectors";
-import { Context } from "../../index";
+import { useAuth } from "../../context";
+import { selectCurrentUser } from "../../redux/user/selectors";
+import { setCurrentUser } from "../../redux/user/actions";
 
 import "./styles.scss";
 
@@ -20,8 +21,9 @@ const Header = () => {
   ];
   const totalScore = useSelector(selectTotalScore);
   const level = useSelector(selectLevel);
-  const { auth } = useContext(Context);
-  const [user] = useAuthState(auth);
+  const currentUser = useSelector(selectCurrentUser);
+  const logout = useAuth();
+  const dispatch = useDispatch();
 
   return (
     <div className="header-container">
@@ -32,7 +34,7 @@ const Header = () => {
               <Logo className="logo" />
             </Link>
           </div>
-          {user ? (
+          {currentUser ? (
             <div className="score-title">
               Score:
               <span className="score-count"> {totalScore}</span>
@@ -41,11 +43,13 @@ const Header = () => {
             <div />
           )}
         </div>
-        {user ? (
+        {currentUser ? (
           <Link
             className="sign-in-and-sign-up-link"
             to="/"
-            onClick={() => auth.signOut()}
+            onClick={() => {
+              dispatch(setCurrentUser(logout));
+            }}
           >
             Sign Out
           </Link>
