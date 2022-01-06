@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import firebase from "firebase/compat";
 import { useHistory } from "react-router-dom";
-import { Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import FormInput from "../formInput";
 import CustomButton from "../customButton";
@@ -12,7 +13,6 @@ import { setCurrentUser } from "../../redux/user/actions";
 import "./styles.scss";
 
 const SignIn = () => {
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,12 +34,20 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      setError("");
       setLoading(true);
       await auth.signInWithEmailAndPassword(email, password);
+      toast.success("Авторизация прошла успешно", {
+        className: "toast-success",
+        draggable: false,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
       history.push("/");
     } catch {
-      setError("Failed to log in");
+      toast.error("Не удалось войти", {
+        className: "toast-error",
+        draggable: false,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
     }
 
     setLoading(false);
@@ -53,8 +61,8 @@ const SignIn = () => {
 
   return (
     <div className="sign-in">
-      <h2 className="title">I already have an account</h2>
-      <span>Sign in with your email and password</span>
+      <div className="title">У меня уже есть аккаунт</div>
+      <div>Войдите в систему, указав свой адрес электронной почты и пароль</div>
       <form onSubmit={handleSubmit}>
         <FormInput
           name="email"
@@ -80,8 +88,10 @@ const SignIn = () => {
             Sign in with Google
           </CustomButton>
         </div>
-        {error && <Alert variant="danger">{error}</Alert>}
       </form>
+      <>
+        <ToastContainer />
+      </>
     </div>
   );
 };

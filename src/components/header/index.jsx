@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectLevel, selectTotalScore } from "../../redux/progress/selectors";
-import { useAuth } from "../../context";
 import { selectCurrentUser } from "../../redux/user/selectors";
 import { setCurrentUser } from "../../redux/user/actions";
 
 import "./styles.scss";
+import { auth } from "../../firebase/utils";
 
 const Header = () => {
   const questionTopics = [
@@ -22,7 +22,6 @@ const Header = () => {
   const totalScore = useSelector(selectTotalScore);
   const level = useSelector(selectLevel);
   const currentUser = useSelector(selectCurrentUser);
-  const logout = useAuth();
   const dispatch = useDispatch();
 
   return (
@@ -48,7 +47,8 @@ const Header = () => {
             className="sign-in-and-sign-up-link"
             to="/"
             onClick={() => {
-              dispatch(setCurrentUser(logout));
+              dispatch(setCurrentUser(null));
+              return auth.signOut();
             }}
           >
             Sign Out

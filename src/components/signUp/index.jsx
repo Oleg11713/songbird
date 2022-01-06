@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Alert } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
 
 import FormInput from "../formInput";
 import CustomButton from "../customButton";
-import { useAuth } from "../../context";
+import { auth, createUserProfileDocument } from "../../firebase/utils";
 
 import "./styles.scss";
-import {auth, createUserProfileDocument} from "../../firebase/utils";
 
 const SignUp = () => {
-  const signup = useAuth();
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
@@ -37,11 +34,14 @@ const SignUp = () => {
     const displayName = firstName + " " + secondName;
 
     if (password !== passwordConfirm) {
-      return setError("Passwords do not match");
+      return toast.error("Пароли не совпадают", {
+        className: "toast-error",
+        draggable: false,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
     }
 
     try {
-      setError("");
       setLoading(true);
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
@@ -49,8 +49,17 @@ const SignUp = () => {
       );
       await createUserProfileDocument(user, { displayName });
       history.push("/");
+      toast.success("Вы успешно зарегистрировались", {
+        className: "toast-error",
+        draggable: false,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
     } catch {
-      setError("Failed to create an account");
+      toast.error("Не удалось зарегистрироваться", {
+        className: "toast-error",
+        draggable: false,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
     }
 
     setLoading(false);
@@ -58,8 +67,8 @@ const SignUp = () => {
 
   return (
     <div className="sign-up">
-      <h2 className="title">I don't have an account</h2>
-      <span>Sign up with your email and password</span>
+      <div className="title">У меня нет аккаунта</div>
+      <div>Зарегистрируйтесь, указав свой адрес электронной почты и пароль</div>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
           type="text"
@@ -104,8 +113,10 @@ const SignUp = () => {
         <CustomButton disabled={loading} type="submit">
           SIGN UP
         </CustomButton>
-        {error && <Alert severity="error">{error}</Alert>}
       </form>
+      <>
+        <ToastContainer />
+      </>
     </div>
   );
 };
