@@ -1,114 +1,129 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { TextField } from "@material-ui/core";
 
-import FormInput from "../formInput";
 import CustomButton from "../customButton";
 import { auth, createUserProfileDocument } from "../../firebase/utils";
 
 import "./styles.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
-  const [userCredentials, setUserCredentials] = useState({
-    firstName: "",
-    secondName: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
+  const validationSchema = yup.object({
+    firstName: yup.string().required("Пожалуйста, заполните данное поле"),
+    secondName: yup.string().required("Пожалуйста, заполните данное поле"),
+    email: yup
+      .string()
+      .email("Введите корректный адрес эл. почты")
+      .required("Пожалуйста, заполните данное поле"),
+    password: yup.string().required("Пожалуйста, заполните данное поле"),
+    passwordConfirm: yup.string().required("Пожалуйста, заполните данное поле"),
   });
 
-  const { firstName, secondName, email, password, passwordConfirm } =
-    userCredentials;
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      secondName: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+    },
+    onSubmit: async (values) => {
+      if (values.password !== values.passwordConfirm) {
+        return toast.error("Пароли не совпадают", {
+          className: "toast-error",
+          draggable: false,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+      try {
+        setLoading(true);
+        const { user } = await auth.createUserWithEmailAndPassword(
+          values.email,
+          values.password
+        );
+        const displayName = values.firstName + " " + values.secondName;
+        const password = values.password;
+        await createUserProfileDocument(user, { displayName, password });
+        toast.success("Вы успешно зарегистрировались", {
+          className: "toast-success",
+          draggable: false,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      } catch {
+        toast.error("Не удалось зарегистрироваться", {
+          className: "toast-error",
+          draggable: false,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
 
-    setUserCredentials({ ...userCredentials, [name]: value });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const displayName = firstName + " " + secondName;
-
-    if (password !== passwordConfirm) {
-      return toast.error("Пароли не совпадают", {
-        className: "toast-error",
-        draggable: false,
-        position: toast.POSITION.BOTTOM_CENTER,
-      });
-    }
-
-    try {
-      setLoading(true);
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-      history.push("/");
-      toast.success("Вы успешно зарегистрировались", {
-        className: "toast-error",
-        draggable: false,
-        position: toast.POSITION.BOTTOM_CENTER,
-      });
-    } catch {
-      toast.error("Не удалось зарегистрироваться", {
-        className: "toast-error",
-        draggable: false,
-        position: toast.POSITION.BOTTOM_CENTER,
-      });
-    }
-
-    setLoading(false);
-  };
+      setLoading(false);
+    },
+    validationSchema: validationSchema,
+  });
 
   return (
     <div className="sign-up">
       <div className="title">У меня нет аккаунта</div>
       <div>Зарегистрируйтесь, указав свой адрес электронной почты и пароль</div>
-      <form className="sign-up-form" onSubmit={handleSubmit}>
-        <FormInput
-          type="text"
+      <form className="sign-up-form" onSubmit={formik.handleSubmit}>
+        <TextField
+          id="firstName"
           name="firstName"
-          value={firstName}
-          onChange={handleChange}
           label="First Name"
-          required
+          value={formik.values.firstName}
+          onChange={formik.handleChange}
+          error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+          helperText={formik.touched.firstName && formik.errors.firstName}
         />
-        <FormInput
-          type="text"
+        <TextField
+          id="secondName"
           name="secondName"
-          value={secondName}
-          onChange={handleChange}
           label="Second Name"
-          required
+          value={formik.values.secondName}
+          onChange={formik.handleChange}
+          error={formik.touched.secondName && Boolean(formik.errors.secondName)}
+          helperText={formik.touched.secondName && formik.errors.secondName}
         />
-        <FormInput
-          type="email"
+        <TextField
+          id="emailSignUp"
           name="email"
-          value={email}
-          onChange={handleChange}
           label="Email"
-          required
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         />
-        <FormInput
-          type="password"
+        <TextField
+          id="passwordSignUp"
           name="password"
-          value={password}
-          onChange={handleChange}
-          label="Password"
-          required
-        />
-        <FormInput
           type="password"
+          label="Password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+        />
+        <TextField
+          id="passwordConfirm"
           name="passwordConfirm"
-          value={passwordConfirm}
-          onChange={handleChange}
+          type="password"
+          value={formik.values.passwordConfirm}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.passwordConfirm &&
+            Boolean(formik.errors.passwordConfirm)
+          }
+          helperText={
+            formik.touched.passwordConfirm && formik.errors.passwordConfirm
+          }
           label="Confirm Password"
-          required
         />
         <CustomButton disabled={loading} type="submit">
           SIGN UP

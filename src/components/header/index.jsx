@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectLevel, selectTotalScore } from "../../redux/progress/selectors";
 import { selectCurrentUser } from "../../redux/user/selectors";
 import { setCurrentUser } from "../../redux/user/actions";
+import { auth } from "../../firebase/utils";
 
 import "./styles.scss";
-import { auth } from "../../firebase/utils";
 
 const Header = () => {
   const questionTopics = [
@@ -23,6 +23,7 @@ const Header = () => {
   const level = useSelector(selectLevel);
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <div className="header-container">
@@ -48,6 +49,7 @@ const Header = () => {
             to="/"
             onClick={() => {
               dispatch(setCurrentUser(null));
+              history.go(0);
               return auth.signOut();
             }}
           >

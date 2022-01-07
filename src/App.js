@@ -1,20 +1,48 @@
-import React  from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./components/header";
 import Homepage from "./pages/homepage";
 import EndGamePage from "./pages/endGamePage";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up";
 import { selectCurrentUser } from "./redux/user/selectors";
+import { setCurrentUser } from "./redux/user/actions";
+import { auth, createUserProfileDocument } from "./firebase/utils";
 
 import "./App.css";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setLoading(true);
+    let unsubscribeFromAuth;
+    unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          dispatch(
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+            })
+          );
+        });
+      }
+    });
+    setLoading(false);
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, [dispatch]);
 
   return (
     <div className="container">
+      {!loading}
       <Header />
       <Route exact path="/" component={Homepage} />
       <Route exact path="/endGame" component={EndGamePage} />
