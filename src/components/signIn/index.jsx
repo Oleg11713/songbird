@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase from "firebase/compat";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -10,6 +10,7 @@ import { TextField } from "@material-ui/core";
 import CustomButton from "../customButton";
 import { auth } from "../../firebase/utils";
 import { setCurrentUser } from "../../redux/user/actions";
+import { selectCurrentUser } from "../../redux/user/selectors";
 
 import "./styles.scss";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +19,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
 
   const validationSchema = yup.object({
     email: yup
@@ -35,13 +37,17 @@ const SignIn = () => {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await auth.signInWithEmailAndPassword(values.email, values.password);
+        dispatch(
+          setCurrentUser(
+            await auth.signInWithEmailAndPassword(values.email, values.password)
+          )
+        );
         toast.success("Авторизация прошла успешно", {
           className: "toast-success",
           draggable: false,
           position: toast.POSITION.BOTTOM_CENTER,
         });
-        history.push("/");
+        history.go(0);
       } catch {
         toast.error("Не удалось войти", {
           className: "toast-error",
@@ -51,6 +57,7 @@ const SignIn = () => {
       }
 
       setLoading(false);
+      console.log(currentUser);
     },
     validationSchema: validationSchema,
   });
@@ -61,6 +68,7 @@ const SignIn = () => {
         await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       )
     );
+    history.go(0);
   };
 
   return (
@@ -71,7 +79,6 @@ const SignIn = () => {
         <TextField
           id="emailSignIn"
           name="email"
-          type="email"
           label="Email"
           value={formik.values.email}
           onChange={formik.handleChange}

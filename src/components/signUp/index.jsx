@@ -24,6 +24,12 @@ const SignUp = () => {
     passwordConfirm: yup.string().required("Пожалуйста, заполните данное поле"),
   });
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    formik.handleSubmit();
+  };
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -62,7 +68,6 @@ const SignUp = () => {
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
-
       setLoading(false);
     },
     validationSchema: validationSchema,
@@ -72,7 +77,7 @@ const SignUp = () => {
     <div className="sign-up">
       <div className="title">У меня нет аккаунта</div>
       <div>Зарегистрируйтесь, указав свой адрес электронной почты и пароль</div>
-      <form className="sign-up-form" onSubmit={formik.handleSubmit}>
+      <form className="sign-up-form" onSubmit={handleSubmit}>
         <TextField
           id="firstName"
           name="firstName"

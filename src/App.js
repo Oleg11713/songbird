@@ -19,30 +19,29 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
-    let unsubscribeFromAuth;
-    unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    const result = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot((snapShot) => {
-          dispatch(
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            })
-          );
-        });
+        if (loading)
+          userRef.onSnapshot((snapShot) => {
+            dispatch(
+              setCurrentUser({
+                id: snapShot.id,
+                ...snapShot.data(),
+              })
+            );
+          });
       }
     });
-    setLoading(false);
-    return () => {
-      unsubscribeFromAuth();
-    };
-  }, [dispatch]);
+    result();
+    return setLoading(false);
+  }, [dispatch, loading]);
+
+  console.log(currentUser);
 
   return (
     <div className="container">
-      {!loading}
       <Header />
       <Route exact path="/" component={Homepage} />
       <Route exact path="/endGame" component={EndGamePage} />

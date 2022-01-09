@@ -18,7 +18,7 @@
     margin: 30px auto;
 
     .MuiFormControl-root {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     input[type="password"] {
@@ -26,12 +26,13 @@
     }
 
     .MuiFormLabel-root {
+      cursor: grab;
       color: #c4c4c4;
       padding-left: 10px;
     }
 
     .MuiFormLabel-root.Mui-focused {
-      color: #008966;
+      color: #00bc8c;
     }
 
     .MuiFormLabel-root.Mui-error {
@@ -43,7 +44,7 @@
     }
 
     .MuiInput-underline.Mui-focused:after {
-      border-bottom-color: #008966;
+      border-bottom-color: #00bc8c;
     }
 
     .MuiInput-underline.Mui-error:after {
