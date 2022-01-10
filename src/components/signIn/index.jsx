@@ -33,6 +33,7 @@ const SignIn = () => {
       try {
         setLoading(true);
         await auth.signInWithEmailAndPassword(values.email, values.password);
+        history.push("/");
         history.go(0);
       } catch {
         toast.error("Не удалось войти", {
@@ -50,6 +51,7 @@ const SignIn = () => {
   const loginWithGoogle = async () => {
     try {
       await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      history.push("/");
       history.go(0);
     } catch {
       toast.error("Не удалось войти", {
