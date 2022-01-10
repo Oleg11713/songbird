@@ -38,8 +38,6 @@ const App = () => {
     return setLoading(false);
   }, [dispatch, loading]);
 
-  console.log(currentUser);
-
   return (
     <div className="container">
       <Header />

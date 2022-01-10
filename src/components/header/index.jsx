@@ -1,11 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectLevel, selectTotalScore } from "../../redux/progress/selectors";
 import { selectCurrentUser } from "../../redux/user/selectors";
-import { setCurrentUser } from "../../redux/user/actions";
 import { auth } from "../../firebase/utils";
 
 import "./styles.scss";
@@ -22,7 +21,6 @@ const Header = () => {
   const totalScore = useSelector(selectTotalScore);
   const level = useSelector(selectLevel);
   const currentUser = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
   const history = useHistory();
 
   return (
@@ -51,7 +49,6 @@ const Header = () => {
             className="sign-in-and-sign-up-link"
             to="/"
             onClick={() => {
-              dispatch(setCurrentUser(null));
               history.go(0);
               return auth.signOut();
             }}
