@@ -34,11 +34,13 @@ const Header = () => {
           </div>
           {currentUser ? (
             <div className="current-user-info">
-              <div className="display-name">{currentUser.displayName}</div>
               <div className="score-title">
                 Score:
                 <span className="score-count"> {totalScore}</span>
               </div>
+              <Link className="user-profile-link" to="/profile">
+                Profile
+              </Link>
             </div>
           ) : (
             <div />

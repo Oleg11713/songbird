@@ -22,10 +22,12 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!snapShot.exists) {
     const { email, displayName } = userAuth;
     const createdAt = new Date();
+    const totalScore = 0;
     try {
       await userRef.set({
         email,
         displayName,
+        totalScore,
         createdAt,
         ...additionalData,
       });

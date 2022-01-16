@@ -17,6 +17,7 @@ import {
   setTotalScore,
 } from "../../redux/progress/actions";
 import { selectCurrentUser } from "../../redux/user/selectors";
+import { firestore } from "../../firebase/utils";
 
 import "./styles.scss";
 
@@ -28,6 +29,15 @@ const AnswerOptions = ({ birds, currentBird }) => {
   const isLevelCompleted = useSelector(selectIsLevelCompleted);
   const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);
   const currentUser = useSelector(selectCurrentUser);
+
+  const writeUserData = async (totalScore) => {
+    await firestore.doc(`users/${currentUser.id}`).set({
+      createdAt: currentUser.createdAt,
+      displayName: currentUser.displayName,
+      email: currentUser.email,
+      totalScore: totalScore,
+    });
+  };
 
   return (
     <div className="answer-options">
@@ -49,6 +59,9 @@ const AnswerOptions = ({ birds, currentBird }) => {
                     dispatch(setIsCorrectCurrentBird(true));
                     dispatch(setIsLevelCompleted(true));
                     dispatch(setTotalScore(scoreOnTheLevel));
+                    currentUser.totalScore += scoreOnTheLevel;
+                    writeUserData(currentUser.totalScore);
+
                     dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
                   } else {
                     click.classList.remove("won");
