@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { TextField } from "@material-ui/core";
@@ -62,6 +62,7 @@ const SignUp = () => {
           closeOnClick: false,
           position: toast.POSITION.BOTTOM_CENTER,
         });
+        formik.resetForm();
       } catch {
         toast.error("Не удалось зарегистрироваться", {
           className: "toast-error",
@@ -135,9 +136,6 @@ const SignUp = () => {
           SIGN UP
         </CustomButton>
       </form>
-      <>
-        <ToastContainer />
-      </>
     </div>
   );
 };

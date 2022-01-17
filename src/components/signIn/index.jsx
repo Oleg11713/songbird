@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import firebase from "firebase/compat";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { TextField } from "@material-ui/core";
@@ -95,9 +95,6 @@ const SignIn = () => {
           </CustomButton>
         </div>
       </form>
-      <>
-        <ToastContainer />
-      </>
     </div>
   );
 };

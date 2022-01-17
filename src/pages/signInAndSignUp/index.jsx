@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 import SignIn from "../../components/signIn";
 import SignUp from "../../components/signUp";
@@ -10,6 +11,9 @@ const SignInAndSignUpPage = () => {
     <div className="sign-in-and-sign-up">
       <SignIn />
       <SignUp />
+      <>
+        <ToastContainer />
+      </>
     </div>
   );
 };
