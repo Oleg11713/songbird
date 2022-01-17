@@ -4,6 +4,8 @@
     <list default="true" id="ee54d77f-8879-417b-93c2-73f868e0846e" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sounds/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
@@ -66,7 +68,7 @@
       <workItem from="1641222299602" duration="64449000" />
       <workItem from="1642336852565" duration="7541000" />
       <workItem from="1642348627322" duration="2528000" />
-      <workItem from="1642351197622" duration="3728000" />
+      <workItem from="1642351197622" duration="4046000" />
     </task>
     <servers />
   </component>
