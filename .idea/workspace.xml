@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee54d77f-8879-417b-93c2-73f868e0846e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/songbird.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/signUp/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/signUp/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/userProfile/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/userProfile/styles.scss" afterDir="false" />
-    </list>
+    <list default="true" id="ee54d77f-8879-417b-93c2-73f868e0846e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +53,7 @@
       <workItem from="1641222299602" duration="64449000" />
       <workItem from="1642336852565" duration="7541000" />
       <workItem from="1642348627322" duration="2528000" />
-      <workItem from="1642351197622" duration="4046000" />
+      <workItem from="1642351197622" duration="4369000" />
     </task>
     <servers />
   </component>
