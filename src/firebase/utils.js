@@ -2,15 +2,16 @@ import firebase from "firebase/compat";
 import "firebase/firestore";
 import "firebase/auth";
 
-firebase.initializeApp({
-  apiKey: "AIzaSyAeFnC-Emz4SVnuszbN0wxi8pBhNg2A8hQ",
-  authDomain: "songbird-41f8d.firebaseapp.com",
-  projectId: "songbird-41f8d",
-  storageBucket: "songbird-41f8d.appspot.com",
-  messagingSenderId: "348563519581",
-  appId: "1:348563519581:web:764bda33cdebf4ecf4f5b4",
-  measurementId: "G-HQEX45HXBE",
-});
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+};
+firebase.initializeApp(firebaseConfig);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;

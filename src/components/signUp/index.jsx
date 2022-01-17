@@ -59,13 +59,9 @@ const SignUp = () => {
         toast.success("Вы успешно зарегистрировались", {
           className: "toast-success",
           draggable: false,
+          closeOnClick: false,
           position: toast.POSITION.BOTTOM_CENTER,
         });
-        values.firstName = "";
-        values.secondName = "";
-        values.email = "";
-        values.password = "";
-        values.passwordConfirm = "";
       } catch {
         toast.error("Не удалось зарегистрироваться", {
           className: "toast-error",
