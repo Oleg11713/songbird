@@ -12,13 +12,19 @@ const ProfilePage = () => {
   return (
     <div className="user-profile-page">
       <div className="title">Данные пользователя</div>
-      <div className="form-with-info">
-        <div className="display-name">Никнейм - {currentUser.displayName}</div>
-        <div className="email">Почта - {currentUser.email}</div>
-        <div className="total-score">
-          Суммарный счёт за все игры - {currentUser.totalScore}
+      {currentUser ? (
+        <div className="form-with-info">
+          <div className="display-name">
+            Никнейм - {currentUser.displayName}
+          </div>
+          <div className="email">Почта - {currentUser.email}</div>
+          <div className="total-score">
+            Суммарный счёт за все игры - {currentUser.totalScore}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div />
+      )}
       <hr className="area" />
       <Link to="/">
         <button className="button-return">Вернуться на главную страницу</button>

@@ -51,6 +51,7 @@ const Header = () => {
             className="sign-in-and-sign-up-link"
             to="/"
             onClick={() => {
+              history.push("/");
               history.go(0);
               return auth.signOut();
             }}

@@ -11,7 +11,7 @@ import { setCurrentUser } from "./redux/user/actions";
 import { auth, createUserProfileDocument } from "./firebase/utils";
 import ProfilePage from "./pages/userProfile";
 
-import "./App.css"
+import "./App.css";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -44,7 +44,7 @@ const App = () => {
       <Header />
       <Route exact path="/" component={Homepage} />
       <Route exact path="/endGame" component={EndGamePage} />
-        <Route exact path="/profile" component={ProfilePage} />
+      <Route exact path="/profile" component={ProfilePage} />
       <Route
         exact
         path="/signIn"
